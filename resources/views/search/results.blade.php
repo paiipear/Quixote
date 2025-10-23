@@ -96,7 +96,18 @@
                 <div><strong>Tujuan:</strong> {{ request('destination') }}</div>
                 <div><strong>Tanggal:</strong> {{ request('departure_date') }}</div>
             </div>
+           @auth
+            @if(Auth::user()->role === 'passenger')
+                <a href="{{ route('passenger.dashboard') }}" class="btn btn-sm btn-outline-secondary rounded-pill">← Kembali</a>
+            @elseif(Auth::user()->role === 'admin')
+                <a href="{{ route('admin.dashboard') }}" class="btn btn-sm btn-outline-secondary rounded-pill">← Kembali</a>
+            @else
+                <a href="{{ url('/') }}" class="btn btn-sm btn-outline-secondary rounded-pill">← Kembali</a>
+            @endif
+            @else
             <a href="{{ url('/') }}" class="btn btn-sm btn-outline-secondary rounded-pill">← Kembali</a>
+        @endauth
+
         </div>
     </div>
 
@@ -133,6 +144,7 @@
                     </div>
 
                     <!-- Kanan: Rating + Harga -->
+                    <!-- Kanan: Rating + Harga -->
                     <div class="bus-info text-end mt-4 mt-md-0 d-flex flex-column align-items-end">
                         <div class="rating mb-1">{{ $schedule->bus->rating ?? '4.6' }}/5</div>
                         <div class="text-muted small">Mulai Dari</div>
@@ -143,24 +155,28 @@
                             {{ $schedule->available_seats }} kursi tersisa
                         </div>
 
+                        {{-- Guest: diarahkan ke login --}}
                         @guest
                             <a href="{{ route('login') }}" class="btn btn-indigo w-100">Pesan</a>
-                        @else
-                            @auth
-                                @if(Auth::user()->role === 'passenger')
-                                    <form action="{{ route('reservations.store') }}" method="POST">
-                                        @csrf
-                                        <input type="hidden" name="schedule_id" value="{{ $schedule->id }}">
-                                        <button class="btn btn-indigo w-100">Pesan Sekarang</button>
-                                    </form>
-                                @endif
-                            @else
-                                <a href="{{ route('login', ['redirect' => request()->fullUrl()]) }}" class="btn btn-indigo w-100">
-                                    Login untuk Pesan
-                                </a>
-                            @endauth
                         @endguest
+
+                        {{-- Passenger: bisa langsung pesan --}}
+                        @auth
+                            @if(Auth::user()->role === 'passenger')
+                                <form action="{{ route('passenger.reserve.store') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="schedule_id" value="{{ $schedule->id }}">
+                                    <input type="number" name="passenger_count" min="1" class="form-control mb-2"
+                                        placeholder="Jumlah tiket" required>
+                                    <button class="btn btn-indigo w-100">Pesan Sekarang</button>
+                                </form>
+                            @elseif(Auth::user()->role === 'admin')
+                                {{-- Admin tidak bisa pesan --}}
+                                <button class="btn btn-secondary w-100" disabled>Admin tidak dapat memesan</button>
+                            @endif
+                        @endauth
                     </div>
+
                 </div>
             @endforeach
         </div>
