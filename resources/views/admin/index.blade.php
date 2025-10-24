@@ -20,7 +20,7 @@
       <a href="{{ route('bus.index') }}" class="block px-4 py-2.5 rounded-lg font-medium text-gray-600 hover:text-white hover:bg-gradient-to-r hover:from-indigo-600 hover:to-purple-500 transition-all">Data Bus</a>
       <a href="{{ route('busroute.index') }}" class="block px-4 py-2.5 rounded-lg font-medium text-gray-600 hover:text-white hover:bg-gradient-to-r hover:from-indigo-600 hover:to-purple-500 transition-all">Rute</a>
       <a href="{{ route('schedule.index') }}" class="block px-4 py-2.5 rounded-lg font-medium text-gray-600 hover:text-white hover:bg-gradient-to-r hover:from-indigo-600 hover:to-purple-500 transition-all">Jadwal</a>
-      <a href="#" class="block px-4 py-2.5 rounded-lg font-medium text-gray-600 hover:text-white hover:bg-gradient-to-r hover:from-indigo-600 hover:to-purple-500 transition-all">Pemesanan</a>
+      <a href="{{ route('admin.reservations') }}" class="block px-4 py-2.5 rounded-lg font-medium text-gray-600 hover:text-white hover:bg-gradient-to-r hover:from-indigo-600 hover:to-purple-500 transition-all">Pemesanan</a>
     </nav>
 
     <form action="{{ route('logout') }}" method="POST" class="mt-auto mb-6 px-4">
@@ -43,28 +43,29 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-10">
       <div class="bg-white border border-indigo-100 rounded-xl shadow-sm p-6 hover:shadow-md hover:-translate-y-1 transition">
         <h5 class="text-sm font-medium text-gray-500 mb-1">Total Bus</h5>
-        <h2 class="text-3xl font-bold text-indigo-700 mb-3">12</h2>
+        <h2 class="text-3xl font-bold text-indigo-700 mb-3">{{ $busCount }}</h2>
         <a href="{{ route('bus.index') }}" class="inline-block text-sm font-medium text-white bg-gradient-to-r from-indigo-600 to-purple-500 px-4 py-2 rounded-lg hover:from-indigo-700 hover:to-purple-600 transition-all shadow-sm">Lihat Data</a>
       </div>
 
       <div class="bg-white border border-indigo-100 rounded-xl shadow-sm p-6 hover:shadow-md hover:-translate-y-1 transition">
         <h5 class="text-sm font-medium text-gray-500 mb-1">Rute Aktif</h5>
-        <h2 class="text-3xl font-bold text-indigo-700 mb-3">8</h2>
-        <a href="#" class="inline-block text-sm font-medium text-white bg-gradient-to-r from-indigo-600 to-purple-500 px-4 py-2 rounded-lg hover:from-indigo-700 hover:to-purple-600 transition-all shadow-sm">Lihat Data</a>
+        <h2 class="text-3xl font-bold text-indigo-700 mb-3">{{ $routeCount }}</h2>
+        <a href="{{ route('busroute.index') }}" class="inline-block text-sm font-medium text-white bg-gradient-to-r from-indigo-600 to-purple-500 px-4 py-2 rounded-lg hover:from-indigo-700 hover:to-purple-600 transition-all shadow-sm">Lihat Data</a>
       </div>
 
       <div class="bg-white border border-indigo-100 rounded-xl shadow-sm p-6 hover:shadow-md hover:-translate-y-1 transition">
         <h5 class="text-sm font-medium text-gray-500 mb-1">Jadwal</h5>
-        <h2 class="text-3xl font-bold text-indigo-700 mb-3">15</h2>
-        <a href="#" class="inline-block text-sm font-medium text-white bg-gradient-to-r from-indigo-600 to-purple-500 px-4 py-2 rounded-lg hover:from-indigo-700 hover:to-purple-600 transition-all shadow-sm">Lihat Data</a>
+        <h2 class="text-3xl font-bold text-indigo-700 mb-3">{{ $scheduleCount }}</h2>
+        <a href="{{ route('schedule.index') }}" class="inline-block text-sm font-medium text-white bg-gradient-to-r from-indigo-600 to-purple-500 px-4 py-2 rounded-lg hover:from-indigo-700 hover:to-purple-600 transition-all shadow-sm">Lihat Data</a>
       </div>
 
       <div class="bg-white border border-indigo-100 rounded-xl shadow-sm p-6 hover:shadow-md hover:-translate-y-1 transition">
         <h5 class="text-sm font-medium text-gray-500 mb-1">Pemesanan</h5>
-        <h2 class="text-3xl font-bold text-indigo-700 mb-3">30</h2>
-        <a href="#" class="inline-block text-sm font-medium text-white bg-gradient-to-r from-indigo-600 to-purple-500 px-4 py-2 rounded-lg hover:from-indigo-700 hover:to-purple-600 transition-all shadow-sm">Lihat Data</a>
+        <h2 class="text-3xl font-bold text-indigo-700 mb-3">{{ $reservationCount }}</h2>
+        <a href="{{ route('admin.reservations') }}" class="inline-block text-sm font-medium text-white bg-gradient-to-r from-indigo-600 to-purple-500 px-4 py-2 rounded-lg hover:from-indigo-700 hover:to-purple-600 transition-all shadow-sm">Lihat Data</a>
       </div>
     </div>
+
   </main>
    
 </body>

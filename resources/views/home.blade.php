@@ -16,6 +16,7 @@
             <a href="#about" class="text-sm text-gray-600 hover:text-indigo-600 transition font-medium">Tentang</a>
             <a href="#contact" class="text-sm text-gray-600 hover:text-indigo-600 transition font-medium">Kontak</a>
             <a href="{{ Route('login') }}" class="bg-gradient-to-r from-indigo-600 to-purple-500 hover:from-indigo-700 hover:to-purple-600 text-white px-4 py-2 rounded-lg font-semibold transition-all duration-200 shadow-md active:scale-95 text-sm">Login</a>
+            <a href="{{ Route('register') }}" class="bg-gradient-to-r from-indigo-600 to-purple-500 hover:from-indigo-700 hover:to-purple-600 text-white px-4 py-2 rounded-lg font-semibold transition-all duration-200 shadow-md active:scale-95 text-sm">Register</a>
             @auth
                 <form action="{{ route('logout') }}" method="POST" class="inline">
                     @csrf

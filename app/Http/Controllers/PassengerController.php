@@ -88,7 +88,7 @@ class PassengerController extends Controller
         $reservation->payment()->create([
             'amount' => $reservation->total_price,
             'payment_method' => $request->payment_method,
-            'status' => 'Berhasil',
+            'status' => 'Lunas',
             'payment_date' => now(),
         ]);
 
@@ -131,14 +131,14 @@ class PassengerController extends Controller
         return view('passenger.detail', compact('reservation'));
     } // pastikan sudah install barryvdh/laravel-dompdf
 
-    public function downloadTicket($id)
-    {
-        $reservation = Reservation::with(['schedule.bus', 'schedule.route'])
-            ->where('user_id', Auth::id())
-            ->findOrFail($id);
+    // public function downloadTicket($id)
+    // {
+    //     $reservation = Reservation::with(['schedule.bus', 'schedule.route'])
+    //         ->where('user_id', Auth::id())
+    //         ->findOrFail($id);
 
-        $pdf = Pdf::loadView('passenger.ticket-pdf', compact('reservation'));
-        return $pdf->download('Tiket-' . $reservation->booking_code . '.pdf');
-    }
+    //     $pdf = Pdf::loadView('passenger.ticket-pdf', compact('reservation'));
+    //     return $pdf->download('Tiket-' . $reservation->booking_code . '.pdf');
+    // }
 
 }

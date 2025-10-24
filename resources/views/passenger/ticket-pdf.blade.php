@@ -16,7 +16,7 @@
 <body>
 
   <div class="header">
-    <h2>🚌 QuixoteBus E-Ticket</h2>
+    <h2>QuixoteBus E-Ticket</h2>
   </div>
 
   <div class="ticket">

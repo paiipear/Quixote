@@ -15,8 +15,8 @@ use App\Http\Controllers\PassengerController;
 
 // 🌐 Halaman utama & pencarian umum
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/search', [SearchController::class, 'search'])->name('search');
 
+Route::get('/search', [SearchController::class, 'search'])->name('search');
 // 🌟 Profile (bawaan Breeze)
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -48,8 +48,10 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     Route::resource('bus', BusController::class);
     Route::resource('busroute', BusRouteController::class);
     Route::resource('schedule', ScheduleController::class);
-    Route::resource('reservation', ReservationController::class);
+    Route::get('/reservations', [AdminController::class, 'reservations'])->name('admin.reservations');
+    Route::get('/reservations/{id}', [AdminController::class, 'showReservation'])->name('admin.reservations.show');
 });
+
 
 // 🔍 Check auth API (debug)
 Route::get('/check-auth', fn() => ['auth' => Auth::check(), 'user' => Auth::user()]);

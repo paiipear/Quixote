@@ -27,35 +27,39 @@
       </p>
 
       <!-- Form Pembayaran -->
-      <form action="{{ route('passenger.payment.process', $reservation->id) }}" method="POST" class="space-y-4">
-        @csrf
-        <div>
-          <label class="block mb-3 text-gray-700">Pilih Metode Pembayaran:</label>
-          <select name="payment_method" required
-            class="w-full border border-gray-300 rounded-lg p-2 mb-4 focus:ring-2 focus:ring-indigo-400">
-            <option value="Transfer Bank">Transfer Bank</option>
-            <option value="Dana">Dana</option>
-            <option value="OVO">OVO</option>
-            <option value="ShopeePay">ShopeePay</option>
-            <option value="Cash">Cash</option>
-          </select>
-        </div>
+     <form action="{{ route('passenger.payment.process', $reservation->id) }}" method="POST" class="space-y-4">
+  @csrf
+  <div>
+    <label class="block mb-3 text-gray-700">Pilih Metode Pembayaran:</label>
+    <select name="payment_method" required
+      class="w-full border border-gray-300 rounded-lg p-2 mb-4 focus:ring-2 focus:ring-indigo-400">
+      <option value="Transfer Bank">Transfer Bank</option>
+      <option value="Dana">Dana</option>
+      <option value="OVO">OVO</option>
+      <option value="ShopeePay">ShopeePay</option>
+      <option value="Cash">Cash</option>
+    </select>
+  </div>
 
-        <div class="flex flex-col gap-3">
-          <!-- Tombol Bayar -->
-          <button type="submit"
-            class="w-full bg-gradient-to-r from-indigo-600 to-purple-500 text-white py-2.5 rounded-lg font-medium shadow-md hover:from-indigo-700 hover:to-purple-600 transition">
-            Bayar Sekarang
-          </button>
+  <div class="flex flex-col gap-3">
+    <!-- Tombol Bayar -->
+    <button type="submit"
+      class="w-full bg-gradient-to-r from-indigo-600 to-purple-500 text-white py-2.5 rounded-lg font-medium shadow-md hover:from-indigo-700 hover:to-purple-600 transition">
+      Bayar Sekarang
+    </button>
+  </div>
+</form>
 
-          <!-- Tombol Kembali -->
-          <button type="button" 
-            onclick="history.back()"
-            class="w-full bg-red-100 text-red-600 py-2.5 rounded-lg font-medium hover:bg-red-200 transition">
-            Batalkan Pembayaran
-          </button>
-        </div>
-      </form>
+<!-- Form terpisah khusus untuk pembatalan -->
+<form action="{{ route('passenger.reservation.cancel', $reservation->id) }}" method="POST" onsubmit="return confirm('Yakin ingin membatalkan pemesanan ini?');" class="mt-3">
+  @csrf
+  @method('PATCH')
+  <button type="submit"
+    class="w-full bg-red-100 text-red-600 py-2.5 rounded-lg font-medium hover:bg-red-200 transition">
+    Batalkan Pemesanan
+  </button>
+</form>
+
     </div>
   </div>
 
